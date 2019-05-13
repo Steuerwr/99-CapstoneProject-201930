@@ -38,8 +38,8 @@ def main():
     # The root TK object for the GUI:
     # -------------------------------------------------------------------------
     root = tkinter.Tk()
-    root.title("Team 06: Will, Ram and Morgan")
-    # TODO 2:  Fill in the XX's above appropriately for your team.
+    root.title("Team 06: Will Steuerwald, Ram Thirunavukkarasu and Morgan Brown")
+    # Done 2:  Fill in the XX's above appropriately for your team.
 
     # -------------------------------------------------------------------------
     # Construct a delegate (for responding to MQTT messages from the robot)
