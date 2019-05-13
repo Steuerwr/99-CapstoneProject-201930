@@ -31,6 +31,10 @@ class MyRobotDelegate(object):
         print_message_received("go", [left_motor_speed, right_motor_speed])
         self.robot.drive_system.go(left_motor_speed, right_motor_speed)
 
+    def forward(self, speed, inches):
+        self.robot.drive_system.go(speed,speed)
+        while True:
+            if self.robot
     # TODO: Add methods here as needed.
 
 
