@@ -38,7 +38,7 @@ def main():
     # The root TK object for the GUI:
     # -------------------------------------------------------------------------
     root = tkinter.Tk()
-    root.title("Team XX: XX, XX and XX")
+    root.title("Team 06: Will, Ram and Morgan")
     # TODO 2:  Fill in the XX's above appropriately for your team.
 
     # -------------------------------------------------------------------------
