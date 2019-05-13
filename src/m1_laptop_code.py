@@ -27,10 +27,8 @@ def get_my_frame(root, window, mqtt_sender):
     # TODO: Put your GUI onto your frame (using sub-frames if you wish).
     forward_distance_button = ttk.Button(frame, text="Forward Distance")
     forward_distance_button.grid()
-    forward_distance_button["command"] = lambda handle_forward_distance:(
+    forward_distance_button["command"] = lambda: handle_forward_distance(
         speed_entry, distance_entry, mqtt_sender)
-    #forward_distance_button["command"] = lambda: handle_forward_distance(
-    #    speed_entry, distance_entry, mqtt_sender)
 
     distance_entry = ttk.Entry(frame)
     distance_entry.insert(0, "100")
