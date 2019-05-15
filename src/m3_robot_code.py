@@ -1,10 +1,10 @@
 """
   Capstone Project.  Code to run on the EV3 robot (NOT on a laptop).
   Author:  Your professors (for the framework)
-    and PUT_YOUR_NAME_HERE.
+    and Morgan Brown.
   Spring term, 2018-2019.
 """
-# TODO 1:  Put your name in the above.
+# DONE 1:  Put your name in the above.
 
 import mqtt_remote_method_calls as mqtt
 import rosebot
@@ -25,6 +25,21 @@ class MyRobotDelegate(object):
 
     def set_mqtt_sender(self, mqtt_sender):
         self.mqtt_sender = mqtt_sender
+
+    def arm_up(self, speed):
+        print_message_received('arm_up', [speed])
+        self.robot.arm_and_claw.motor.turn_on(speed)
+        while True:
+            if self.robot.arm_and_claw.touch_sensor.is_pressed():
+                self.robot.arm_and_claw.motor.turn_off()
+                break
+
+    #def arm_calibrated(self):
+
+
+    #def arm_position(self):
+
+    #def arm_down(self):
 
     # TODO: Add methods here as needed.
 
