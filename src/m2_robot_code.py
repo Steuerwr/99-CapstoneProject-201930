@@ -41,4 +41,10 @@ def print_message_received(method_name, arguments=None):
 
 
 # TODO: Add functions here as needed.
+def handle_spin_right(self, mqtt_sender, degrees):
+    self.robot.drive_system.
+    self.go(100,-100)
+    while True:
+        if  self.
+
 
