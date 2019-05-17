@@ -54,8 +54,8 @@ def get_my_frame(root, window, mqtt_sender):
     arm_down_Entry.grid()
 
     arm_up_label["command"] = lambda: handle_arm_up(arm_up_Entry, mqtt_sender)
-    arm_calibrate_label["command"] = lambda: calibration(arm_calibrate_Entry, mqtt_sender)
-    arm_to_label["command"] = lambda: arms_motor_position(arm_to_Entry, mqtt_sender)
+    arm_calibrate_label["command"] = lambda: calibration(arm_up_Entry, mqtt_sender)
+    arm_to_label["command"] = lambda: arms_motor_position(arm_up_Entry, arm_to_Entry, mqtt_sender)
     arm_down_label["command"] = lambda: arms_to_zero(arm_down_Entry, mqtt_sender)
 
     # Return your frame:
@@ -81,17 +81,21 @@ class MyLaptopDelegate(object):
 # TODO: Add functions here as needed.
 def handle_arm_up(arm_up_Entry, mqtt_sender):
     speed = int(arm_up_Entry.get())
-    print('arm up message:', arm_up_Entry)
+    print('arm up message:', speed)
     mqtt_sender.send_message('arm_up', [speed])
 
-def calibration(arm_calibrate_Entry, mqtt_sender):
-    print('arm calibrate message:', arm_calibrate_Entry)
-    mqtt_sender.send_message('arm_calibrated', [arm_calibrate_Entry.get()])
+def calibration(arm_up_Entry, mqtt_sender):
+    speed = int(arm_up_Entry.get())
+    print('arm_calibrate message:', speed)
+    mqtt_sender.send_message('arm_calibrated', [speed])
 
-def arms_motor_position(arm_to_Entry, mqtt_sender):
-    print('arm_position message:', arm_to_Entry)
-    mqtt_sender.send_message('arm position', [arm_to_Entry.get()])
+def arms_motor_position(arm_up_Entry, arm_to_Entry, mqtt_sender):
+    position = int(arm_to_Entry.get())
+    speed = int(arm_up_Entry.get())
+    print('arm_position message:', position)
+    mqtt_sender.send_message('arm_position', [speed, position])
 
-def arms_to_zero(arm_down_Entry,mqtt_sender):
-    print('arm_down message:', arm_down_Entry)
-    mqtt_sender.send_message('arm down', [arm_down_Entry.get()])
+def arms_to_zero(arm_up_Entry, mqtt_sender):
+    speed = int(arm_up_Entry.get())
+    print('arm_down message:', arm_up_Entry)
+    mqtt_sender.send_message('arm_down', [speed])

@@ -34,12 +34,32 @@ class MyRobotDelegate(object):
                 self.robot.arm_and_claw.motor.turn_off()
                 break
 
-    #def arm_calibrated(self):
+    def arm_calibrated(self, speed):
+        self.arm_up(speed)
+        self.robot.arm_and_claw.motor.reset_position()
+        self.robot.arm_and_claw.motor.turn_on(-speed)
+        while True:
+            if abs(self.robot.arm_and_claw.motor.get_position()) >= 14.2*360:
+                self.robot.arm_and_claw.motor.turn_off()
+                break
+        self.robot.arm_and_claw.motor.reset_position()
 
+    def arm_position(self, speed, position):
+        if self.robot.arm_and_claw.motor.get_position() >= position:
+            self.robot.arm_and_claw.motor.turn_on(-speed)
+            while True:
+                if self.robot.arm_and_claw.motor.get_position() <= position:
+                    self.robot.arm_and_claw.motor.turn_off()
+                    break
+        else:
+            self.robot.arm_and_claw.motor.turn_on(speed)
+            while True:
+                if abs(self.robot.arm_and_claw.motor.get_position()) >= position:
+                    self.robot.arm_and_claw.motor.turn_off()
+                    break
 
-    #def arm_position(self):
-
-    #def arm_down(self):
+    def arm_down(self, speed):
+        self.arm_position(speed, 0)
 
     # TODO: Add methods here as needed.
 
