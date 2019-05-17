@@ -53,10 +53,17 @@ def get_my_frame(root, window, mqtt_sender):
     arm_down_Entry.insert(0, 100)
     arm_down_Entry.grid()
 
+    colors_label = ttk.Button(frame, text='Colors')
+    colors_label.grid()
+
+    colors_Entry = ttk.Entry(frame)
+    colors_Entry.grid()
+
     arm_up_label["command"] = lambda: handle_arm_up(arm_up_Entry, mqtt_sender)
     arm_calibrate_label["command"] = lambda: calibration(arm_up_Entry, mqtt_sender)
     arm_to_label["command"] = lambda: arms_motor_position(arm_up_Entry, arm_to_Entry, mqtt_sender)
     arm_down_label["command"] = lambda: arms_to_zero(arm_down_Entry, mqtt_sender)
+    colors_label["command"] = lambda: move_to_color(colors_Entry, mqtt_sender)
 
     # Return your frame:
     return frame
@@ -99,3 +106,8 @@ def arms_to_zero(arm_up_Entry, mqtt_sender):
     speed = int(arm_up_Entry.get())
     print('arm_down message:', arm_up_Entry)
     mqtt_sender.send_message('arm_down', [speed])
+
+def move_to_color(color_Entry, mqtt_sender):
+    color = color_Entry.get()
+    print('go to color message:', color)
+    mqtt_sender.send_message('go_to_color', [color])
