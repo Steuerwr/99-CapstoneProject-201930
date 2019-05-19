@@ -1,10 +1,10 @@
 """
   Capstone Project.  Code to run on the EV3 robot (NOT on a laptop).
   Author:  Your professors (for the framework)
-    and PUT_YOUR_NAME_HERE.
+    and Will Steuerwald.
   Spring term, 2018-2019.
 """
-# TODO 1:  Put your name in the above.
+# Done 1:  Put your name in the above.
 
 import mqtt_remote_method_calls as mqtt
 import rosebot
@@ -31,6 +31,10 @@ class MyRobotDelegate(object):
         print_message_received("go", [left_motor_speed, right_motor_speed])
         self.robot.drive_system.go(left_motor_speed, right_motor_speed)
 
+    def forward(self, speed, inches):
+        self.robot.drive_system.go(speed,speed)
+        while True:
+            if self.robot
     # TODO: Add methods here as needed.
 
 
