@@ -48,6 +48,16 @@ class MyRobotDelegate(object):
                 self.robot.drive_system.stop()
                 break
 
+    def move_until(self, speed, distance):
+        self.go(int(speed), int(speed))
+        while True:
+            dist = self.get_distance()
+            print(dist)
+            if dist < int(distance):
+                self.robot.drive_system.right_motor.turn_off()
+                self.robot.drive_system.left_motor.turn_off()
+                break
+                
     def get_distance(self):
         dist = []
         max = 0
@@ -65,17 +75,6 @@ class MyRobotDelegate(object):
             sum = sum + dist[k]
         sum = (sum - (max + min)) / 3
         return sum
-
-    def move_until(self, speed, distance):
-        self.go(int(speed), int(speed))
-        while True:
-            dist = self.get_distance()
-            print(dist)
-            if dist < int(distance):
-                self.robot.drive_system.right_motor.turn_off()
-                self.robot.drive_system.left_motor.turn_off()
-                break
-
     # TODO: Add methods here as needed.
 
 
